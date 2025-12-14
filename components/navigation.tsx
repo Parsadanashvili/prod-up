@@ -1,19 +1,24 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { signOut } from 'next-auth/react';
-import { Button } from '@/components/ui/button';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { MessageIcon, TaskIcon, FileIcon, LogoutIcon } from '@hugeicons/core-free-icons';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  MessageIcon,
+  TaskIcon,
+  FileIcon,
+  LogoutIcon,
+} from "@hugeicons/core-free-icons";
 
 export function Navigation() {
   const pathname = usePathname();
 
   const navItems = [
-    { href: '/chat', label: 'Chat', icon: MessageIcon },
-    { href: '/tasks', label: 'Tasks', icon: TaskIcon },
-    { href: '/summary', label: 'Summary', icon: FileIcon },
+    { href: "/chat", label: "Chat", icon: MessageIcon },
+    { href: "/tasks", label: "Tasks", icon: TaskIcon },
+    { href: "/summary", label: "Summary", icon: FileIcon },
   ];
 
   return (
@@ -22,9 +27,9 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
             <Link href="/" className="text-xl font-bold">
-              ProdUp
+              Stand-up
             </Link>
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
@@ -42,11 +47,11 @@ export function Navigation() {
                   </Link>
                 );
               })}
-            </div>
+            </div> */}
           </div>
           <Button
             variant="ghost"
-            onClick={() => signOut({ callbackUrl: '/auth/signin' })}
+            onClick={() => signOut({ callbackUrl: "/auth/signin" })}
           >
             <HugeiconsIcon icon={LogoutIcon} className="w-5 h-5 mr-2" />
             Sign Out
@@ -56,4 +61,3 @@ export function Navigation() {
     </nav>
   );
 }
-
