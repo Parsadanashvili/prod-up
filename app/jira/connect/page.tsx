@@ -4,12 +4,17 @@ import { requireAuth } from "@/lib/auth";
 import { getJiraCredentialsByUserId } from "@/lib/jira/queries";
 import { redirect } from "next/navigation";
 
-export default async function JiraConnectPage() {
+export default async function JiraConnectPage({
+  searchParams,
+}: {
+  searchParams?: { callback?: string };
+}) {
   const user = await requireAuth();
   const credentials = await getJiraCredentialsByUserId(user.id);
+  const callback = searchParams?.callback || "/chat";
 
   if (credentials) {
-    redirect("/chat");
+    redirect(callback);
   }
 
   return (
@@ -32,6 +37,7 @@ export default async function JiraConnectPage() {
             <li>Get AI-powered summaries of your work</li>
           </ul>
           <form action="/api/jira/connect" method="GET">
+            <input type="hidden" name="callback" value={callback} />
             <Button type="submit" className="w-full">
               Connect Jira Account
             </Button>

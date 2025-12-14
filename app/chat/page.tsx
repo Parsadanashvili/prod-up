@@ -1,5 +1,6 @@
 import { ChatInterface } from "@/components/chat/chat-interface";
 import { getCurrentUser } from "@/lib/auth";
+import { getJiraCredentialsByUserId } from "@/lib/jira/queries";
 import { redirect } from "next/navigation";
 
 export default async function ChatPage() {
@@ -7,6 +8,11 @@ export default async function ChatPage() {
 
   if (!user?.id) {
     redirect("/auth/signin");
+  }
+
+  const jira = await getJiraCredentialsByUserId(user.id);
+  if (!jira) {
+    redirect("/jira/connect?callback=/chat");
   }
 
   return (
