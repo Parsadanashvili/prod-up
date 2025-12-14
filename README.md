@@ -56,7 +56,7 @@ NEXTAUTH_URL=http://localhost:3000
 
 4. Initialize the database:
 ```bash
-bun run scripts/init-db.ts
+bun run init-db
 ```
 
 5. Run the development server:
